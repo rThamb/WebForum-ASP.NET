@@ -1,0 +1,105 @@
+﻿@model IEnumerable<Web_Forum_cSharp.Models.Thread>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Summary</h2>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <h3> Welcome @User.Identity.Name </h3>  
+}
+
+
+<p>
+    @Html.ActionLink("Create New Thread", "Create")
+
+    | @if(User.Identity.IsAuthenticated)
+      {
+          @Html.ActionLink("Logout", "Logout", "Account") 
+      }
+      else
+      { 
+          @Html.ActionLink("Login", "Login", "Account")                                             
+      }
+    
+    | @if(!User.Identity.IsAuthenticated)
+    {
+     @Html.ActionLink("Create An Account", "Register", "Account")
+    }
+
+</p>
+
+
+@using (Html.BeginForm("Index", "Search"))
+{
+    @Html.TextBox("keyword");
+    <input type="submit" value="Search" class="btn btn-default"/>
+}
+
+<table class="table table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Views)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Upvotes)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            Tags
+        </th>
+        <th>
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Views)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Upvotes)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserName)
+        </td>
+        
+        <td>
+            @foreach (var tagNums in item.TagThreads)
+            {
+                @Html.DisplayFor(modelItem => tagNums.Tag.TagText) <br />         
+            }
+        </td>
+
+        <td>
+            @Html.ActionLink("Read", "Details", new { id = item.ThreadId }) 
+            
+            @if(User.Identity.Name == "admin")
+            {
+            <text>| </text>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ThreadId }) <text>| </text>
+            @Html.ActionLink("Delete", "Delete", new { id=item.ThreadId })
+            }
+        </td>
+    </tr>
+}
+
+</table>

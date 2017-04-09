@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5fc934131ad3410f802ca31c623c2d26" Name="Diagram1">
+        <EntityTypeShape EntityType="ThreadModel.TagThread" Width="1.5" PointX="8.625" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ThreadModel.Thread" Width="1.5" PointX="5.25" PointY="3.125" IsExpanded="true" />
+        <AssociationConnector Association="ThreadModel.FK_TagThread_Thread" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ThreadModel.Tag" Width="1.5" PointX="13.375" PointY="3.875" />
+        <AssociationConnector Association="ThreadModel.FK_TagThread_Tag" />
+        <EntityTypeShape EntityType="ThreadModel.Comment" Width="1.5" PointX="5.5" PointY="6.625" />
+        <AssociationConnector Association="ThreadModel.FK_Comment_ToParentComment" />
+        <AssociationConnector Association="ThreadModel.FK_Comment_ToThread" />
+        <EntityTypeShape EntityType="ThreadModel.User" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="ThreadModel.UserDetail" Width="1.5" PointX="3" PointY="3.125" />
+        <AssociationConnector Association="ThreadModel.FK_Thread_UserDetail" />
+        <AssociationConnector Association="ThreadModel.FK_UserDetails_User" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
